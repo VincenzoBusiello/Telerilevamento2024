@@ -28,3 +28,4 @@ plot(flowers, insects, pch=19, cex=0.5)
 
 # Color
 plot(flowers, insects, pch=19, cex=.5, col="chocolate1")
+
