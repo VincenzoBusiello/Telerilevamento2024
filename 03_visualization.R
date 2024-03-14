@@ -34,3 +34,24 @@ plot(b4, col=clg)
 
 b8 <- im.import("sentinel.dolomites.b8.tif")
 plot(b8, col=clg)
+
+# multiframe
+par(mfrow=c(2,2))
+plot(b2, col=clg)
+plot(b3, col=clg)
+plot(b4, col=clg)
+plot(b8, col=clg)
+
+# exercise: plot the four band in one row
+par(mfrow=c(,4))
+plot(b2, col=clg)
+plot(b3, col=clg)
+plot(b4, col=clg)
+plot(b8, col=clg)
+
+# creo una immagine satellitare con le bande b2, b3, b4, b8
+stacksent <- c(b2, b3, b4, b8)
+plot(stacksent, col=clg)
+
+dev.off()
+plot(stacksent[[4]], col=clg)
