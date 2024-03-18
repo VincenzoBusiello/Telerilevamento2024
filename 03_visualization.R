@@ -1,18 +1,19 @@
-# Visualizzazione dei dati satellitari in R con imageRy
+# Visualizzazione dei dati satellitari in R utilizzando la libreria imageRy
 
 library(terra)
 library(imageRy)
 
-# Tutte le funzioni di imageRy inizia con "im.".
+# Tutte le funzioni di imageRy iniziano con "im.".
 
 # im.list() fornisce la lista di tutti i dati disponibili in imageRy
 im.list()
 
-# importare i dati assegnandoli ad una variabile di nome "mato" con:
-mato <- im.import("matogrosso_ast_2006209_lrg.jpg")
+# importazione dei dati:
 # im.import() visualizza direttamente l'immagine importata
+# es: mato <- im.import("matogrosso_ast_2006209_lrg.jpg")
 
-# importo i dati assegnandoli ad una variabile di nome "b2".
+
+# importo i dati assegnandoli ad una variabile;  la banda del blu è "b2".
 # con questa immagine si visualizza tutto ciò che riflette la lunghezza d'onda del blu, quindi la seconda banda.
 b2 <- im.import("sentinel.dolomites.b2.tif")
 
@@ -20,7 +21,7 @@ b2 <- im.import("sentinel.dolomites.b2.tif")
 # classe, dimensione (numero di pixel divisi per riga e colonna); risoluzione (dimensione dei pixel 10,10 significa che ogni pixel è 10 m), ecc.
 
 
-# cambio la scala dei colori con colorRampPalette() in cui passiamo un vettore di più elementi che corrispondono ai colori
+# cambio la scala dei colori con colorRampPalette() in cui si crea un vettore di colori
 # si possono cambiare le sfumature segnandole nelle parentesi esterne alla funzione
 clg <- colorRampPalette(c("black", "grey", "light grey"))(3)
 plot(b2, col=clg)
@@ -61,6 +62,7 @@ stacksent <- c(b2, b3, b4, b8)
 plot(stacksent, col=clg)
 
 dev.off() # comando per chiudere le finestre di visualizzazione di R
+# visualizzazione del quarto elemento dello stack
 plot(stacksent[[4]], col=clg)
 
 
