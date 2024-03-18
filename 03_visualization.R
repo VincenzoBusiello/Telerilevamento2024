@@ -15,6 +15,11 @@ mato <- im.import("matogrosso_ast_2006209_lrg.jpg")
 # importo i dati assegnandoli ad una variabile di nome "b2".
 # con questa immagine si visualizza tutto ciò che riflette la lunghezza d'onda del blu, quindi la seconda banda.
 b2 <- im.import("sentinel.dolomites.b2.tif")
+
+# richiamando il nome della variabile si visualizzano le informazioni di quell'oggetto: 
+# classe, dimensione (numero di pixel divisi per riga e colonna); risoluzione (dimensione dei pixel 10,10 significa che ogni pixel è 10 m), ecc.
+
+
 # cambio la scala dei colori con colorRampPalette() in cui passiamo un vettore di più elementi che corrispondono ai colori
 # si possono cambiare le sfumature segnandole nelle parentesi esterne alla funzione
 clg <- colorRampPalette(c("black", "grey", "light grey"))(3)
