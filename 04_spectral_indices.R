@@ -46,3 +46,47 @@ im.plotRGB(m2006, r=2, g=1, b=3)
 im.plotRGB(m2006, r=2, g=3, b=1)
 
 # creazione di un indice per fare delle differenze quantitative per valutare il cambiamento del paesaggio
+
+
+# riprendo la lista dei file a disposizione nel pacchetto imageRy
+
+im.list()
+
+# importo l'immagine "matogrosso_l5_1992219_lrg.jpg" assegnandole il nome m1992
+m1992 <- im.import("matogrosso_l5_1992219_lrg.jpg")
+
+# calcolo del DVI (difference vegetation index); utilizzo l'uguale perché è una operazione matematica
+# si prende la banda del NIR e si esegue una sottrazione di pixel con la banda del Rosso; 
+# se il risultato della sottrazione sarà alto allora quel pixel comprende una zona di vegetazione
+# essendo in 8 bit, se il valore NIR sarà massimo allora la sottrazione sarà 255-0=255; al contrario sarebbe -255. 
+dvi1992 = m1992[[1]] - m1992[[2]]
+# si può scrivere anche utilizzando i nomi delle bande ma la prima banda dovrebbe essere richiamata con: m1992$matogrosso~2219_lrg_1; molto più complicato e meno intuitivo
+
+# color palette da utilizzare per visualizzare la banda ricavata in DVI
+cl <- colorRampPalette(c("darkblue", "yellow", "red", "black")) (100)
+plot(dvi1992, col=cl)
+
+
+# importo l'immagine del 2006 e calcolo il DVI
+
+im.list()
+m2006 <- im.import("matogrosso_ast_2006209_lrg.jpg")
+dvi2006 = m2006[[1]] - m2006[[2]]
+
+
+#esercizio: plotting delle due immagini DVI per metterle a confronto
+
+par(mfrow=c(2,1))
+plot(dvi1992, col=cl)
+plot(dvi2006, col=cl)
+
+# se le immagini a disposizione sono a bit differenti, si cambia indice utilizzando una normalizzazione. l'indice da utilizzare sarà NDVI (Normalized Difference Vegetation Index)
+# NDVI = NIR-RED/NIR+RED; il risultato sarà compreso tra -1 e 1;
+ndvi1992 = dvi1992 / (m1992[[1]] + m1992[[2]])
+ndvi2006 = dvi2006 / (m2006[[1]] + m2006[[2]])
+
+par(mfrow=c(1,2))
+plot(ndvi1992, col=cl)
+plot(ndvi2006, col=cl)
+
+# si può utilizzare anche una funzione di imageRy: im.ndvi(m1992, 1, 2)
