@@ -57,3 +57,7 @@ sd13 <- focal(nir, matrix (1/169, 13, 13), fun=sd)
 plot(sd13, col=viridisc)
 
 stacksd <- c(sd3, sd7, sd13)
+
+# la banda che più viene scelta per eseguire questi calcoli è quella del NIR perché è più discriminante. Se non ci fosse l'infrarosso allora si potrebbe ovviare
+# con le componenti principali, delle quali la prima componente comprenderà la più ampia variabilità. Essendo le bande originali molto correlate tra loro si 
+# esegue l'analisi delle componenti principali così da avere la componente con la più alta variabilità. 
