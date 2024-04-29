@@ -44,4 +44,16 @@ plot(sd3)
 viridisc <- colorRampPalette(viridis(7))(256)
 plot(sd3, col=viridisc)
 # la variabilità viene indicata con la differenza di colore: dove è stato rimarcato il giallo vi è maggiore variabilità. Vengono risaltati molto di più i bordi.
-# 
+# più è piccola la finestra maggiore sarà la misura di dettaglio della deviazione standard. 
+
+sd7 <- focal(nir, matrix (1/49, 7, 7), fun=sd)
+plot(sd7, col=viridisc)
+
+# creo uno stack per poter vedere le differenze tra le due deviazioni standard
+stacksd <- c(sd3,sd7)
+plot(stacksd, col=viridisc)
+
+sd13 <- focal(nir, matrix (1/169, 13, 13), fun=sd)
+plot(sd13, col=viridisc)
+
+stacksd <- c(sd3, sd7, sd13)
