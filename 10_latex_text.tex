@@ -1,19 +1,16 @@
-% come fare un testo con latex;
-% le funzioni vengono richiamate utilizzando il \nomefunzione e gli argomenti verranno passati con {};
-% i commenti vengono eseguiti attraverso il simbolo percentuale;
-% \documentclass{article} è la prima funzione utilizzata; successivamente c'è la funzione \usepackage{}, una funzione per aggiungere pacchetti aggiuntivi in latex;
-% \begin{} è una funzione generica che inizia un processo in base all'argomento passato tra le {}
-% \end{} termina il processo iniziato con la funzione \begin.
-% \maketitle{} crea il titolo del file; 
-% \section{} crea sezioni diverse del documento assegnandogli automaticamente un numero progressivo; scrivendo qualsiasi cosa dopo la funzione section (come un testo). 
-% Se si manda a capo nel codice, compilandolo si avrà un'indentazione con il testo successivo alla riga vuota. Per togliere l'indentazione bisogna utilizzare la funzione \noindent
 \documentclass[12pt]{article}
-\usepackage{graphicx} % Required for inserting images
-\usepackage{hyperref}
+
+
+\usepackage{graphicx} % Il pacchetto permette di caricare delle immagini
+\usepackage{hyperref} % Permette di inserire collegamenti all'interno del testo
+\usepackage{natbib} % permette di gestire la bibliografia 
+\usepackage{lineno} % numera le righe del testo
+\linenumbers % numera le righe del testo
+
 
 \title{My first LaTeX doc}
 \author{Vincenzo Busiello}
-%\date{ }
+%\date{} % permette di cambiare l'impostazione della data a seconda degli argomenti che vengono passati. Se non è presente, pesca direttamente la data dal sistema impostandola come mm/gg/aa. 
 
 \begin{document}
 
@@ -21,67 +18,85 @@
 \tableofcontents
 
 \section{Introduction} 
-\label{sec:intro} % nel caso in cui si sbagli il nome della sezione compariranno dei ?? nella porzione in cui richiamo la \ref{}
-E ho tutto dentro e poi mi accorgo che non ho parole
-Non c'è poesia solo malinconia e malumore
-E resto qui tra le mie mani e il resto del dolore
-E resto qui tra le mie mani e una contraddizione
-Me ne andrò controvento
-Sarò via in un momento
-Me ne andrò controvento
-Sarò via in un momento
+\label{sec:intro} % nel caso in cui si sbagli il nome della sezione compariranno dei ?? nella porzione in cui richiamo la \ref{}. Ciò permette di poter cercare eventuali errori all'interno del testo in modo più semplice. 
+%\textbf{E ho tutto dentro e poi mi accorgo che non ho parole} % \textb mette in grassetto la parte di testo (che ho preso a caso da internet) passata come argomento
+%\textit{Non c'è poesia solo malinconia e malumore} % \textit formatta il testo passato come argomento in corsivo
 
-Ora vorrei spiazzare il tempo senza far rumore
-Tutto và via mi lascia qui a guardarmi frantumare
-Non c'è poesia nè voglia di aver timore
-La cera brucia adesso non mi servono parole
-E ho tutto dentro e poi mi accorgo che non ho parole
-Non c'è poesia solo malinconia e malumore
-E resto qui tra le mie mani e il resto del dolore
-E resto qui tra le mie mani e una contraddizione
-Me ne andrò controvento
-Sarò via in un momento
-Me ne andrò controvento
-Sarò via in un momento
+In this thesis we dealt with Dominance loss and tenure maintenance in Kalahari meerkats, one of the main themes in ethology \cite{Duncan2023}\\ 
+%\smallskip % serve per inserire uno piccolo spazio tra un paragrafo e il successivo
+We were very interested in developmental influences \cite{LaLoggia2024}
+\bigskip{} % inserisce uno spazio più grande rispetto a \smallskip
+The Tree-OH are the best band ever. 
+\footnote{Source: Io e Carlo, ma anche Alfio <3} % inserisce la nota a pié di pagina
 
-Ora vorrei spiazzare il tempo senza far rumore
-Tutto và via mi lascia qui a guardarmi frantumare
-Non c'è poesia nè voglia di aver timore
-La cera brucia adesso non mi servono parole
-E ho tutto dentro e poi mi accorgo che non ho parole
-Non c'è poesia solo malinconia e malumore
-E resto qui tra le mie mani e il resto del dolore
-E resto qui tra le mie mani e una contraddizione
-Me ne andrò controvento
-Sarò via in un momento
-Me ne andrò controvento
-Sarò via in un momento
-Ora vorrei spiazzare il tempo senza far rumore
-Tutto và via mi lascia qui a guardarmi frantumare
-Non c'è poesia nè voglia di aver timore
-La cera brucia adesso non mi servono parole
 
 \section{Methods}
 \subsection{Study Area}
 \subsection{Algorithms}
 The equation used was Equation\ref{eq:sum}: 
-\begin{equation}
-    T = \sum p_i
+\begin{equation} 
+    T = \sum p_i % \sum inserisce il simbolo della sommatoria
     \label{eq:sum}
 \end{equation}
 
 In this thesis we made use of Equation \ref{eq:newton}:
 
 \begin{equation}
-    F=\sqrt[n]{G \frac{m_1 \times m_2}{d^2}}
+    F=\sqrt[n]{G \frac{m_1 \times m_2}{d^2}} % \sqrt = radice quadrata. tra le [] si può inserire l'esponente della radice. l'underscore serve per inserire il pedice. \times inserisce l'operatore moltiplicazione. 
     \label{eq:newton}
 \end{equation}
 
 \section{Results}
-
+In this thesis the algorithm led to the results shown in figure \ref{fig:pulcinella}
 
 \section{Discussion}
+In this theses we demostrated that:
+\begin{itemize}
+    \item Dominance loss and tenure maintanance in Kalahari meerkats
+    \item Developmental influences on Social Competence and Neuroplasticity
+\end{itemize}
 
+\begin{enumerate}
+    \item Dominance loss and tenure maintanance in Kalahari meerkats
+    \item Developmental influences on Social Competence and Neuroplasticity
+\end{enumerate}
+    
 Our results are in line with previous paper, introduce in section \ref{sec:intro}.
 
+\section{Data Availability}
+All data  used in this thesis are available at \url{www.nasa.com}
+\begin{thebibliography}{999}
+    
+    \bibitem[Duncan et al., 2023]{Duncan2023} 
+    Duncan, C., Thorley, J., Manser, M. B., \& Clutton-Brock, T. (2023). Dominance loss and tenure maintenance in Kalahari meerkats. Behavioral Ecology, 34(6), 979-991.
+    
+    \bibitem[La Loggia, 2024]{LaLoggia2024}
+    La Loggia, O. (2024). Developmental Influences on Social Competence and Neuroplasticity: The Impact of Early Social Complexity in a Cooperatively Breeding Fish (Doctoral dissertation, Institute of Ecology).
+
+\end{thebibliography}
+
+\newpage
+\begin{figure}
+    
+    \centering % serve a centrare la figura in mezzo alla pagina
+    \includegraphics[width=0.5\textwidth]{Pulcinella.jpg} % con il parametro \textwidth si adatta l'immagine alla grandezza del testo; moltiplicandola per 0.5 si ottiene l'immagine pari alla metà. 
+    \caption{Enter Caption}
+    \label{fig:pulcinella}
+    
+\end{figure}
+
+\newpage
+\hline
+\bigskip
+\textbf{Box 1 - blabla}
+\bigskip
+\hline
+\bigskip
+\begin{itemize} % serve a fare un elenco puntato
+    \item The Tree-OH are the best band ever.
+    \item The Tree-OH are the best band ever.
+    \item The Tree-OH are the best band ever.
+\end{itemize}
+\bigskip
+\hline
 \end{document}
