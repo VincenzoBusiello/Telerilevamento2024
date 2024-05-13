@@ -1,0 +1,99 @@
+\documentclass{beamer} % classe di documenti per poter creare le presentazioni che in questo linguaggio vengono definite come frame. 
+
+\usepackage{graphicx} % Pakage necessario per utilizzare immagini
+
+\title{Presentazione in LaTeX}
+\author{Vincenzo Busiello}
+\date{May 2024}
+
+\begin{document}
+
+\maketitle
+
+\section{Introduction}
+
+% prima slide
+\begin{frame}{Prima slide}
+    inserisco il testo qui
+\end{frame}
+
+% seconda slide
+\begin{frame}{Itemize}
+    \begin{itemize}
+        \item primo posto dell'elenco
+        \item secondo elemento
+        \item terzo elemento
+    \end{itemize}
+\end{frame}
+
+% aumentare e diminuire le dimensioni del testo
+%\miniscule    = 8pt
+%\tiny         = 9pt
+%\scriptsize   = 10pt
+%\footnotesize = 11pt
+%\small        = 12pt
+%\normalsize   = 14pt
+%\large        = 17pt
+%\Large        = 20pt 
+%\LARGE        = 25pt
+%\huge         = 30pt
+%\Huge         = 36pt
+%\HUGE         = 48pt
+
+% terza slide
+\begin{frame}{Text dimension}
+    \scriptsize inserisco il testo qui \\
+\end{frame}
+
+% quarta slide
+\begin{frame}{Text dimension 2}
+    inserisco il \textbf{testo} qui \\
+    \bigskip
+    inserisco il \textit{testo} qui \\
+    \smallskip
+    inserisco il testo qui
+\end{frame}
+
+\section{Formulas}
+\begin{frame}{Algorithms Used}
+
+In questa slide c'è una formula scritta con LaTeX
+\bigskip
+    \begin{equation}
+        \sigma =\sqrt{\frac{\displaystyle\sum_{i=1}^{N}{(x - \mu)^2}}{N}}
+    \end{equation}
+\end{frame}
+
+\section{Results}
+
+\begin{frame}{Main results achieved}
+    \begin{figure}
+        \centering
+        \includegraphics[width=.9\linewidth]{excel-grafico-istogramma.png}
+        %\caption{Enter Caption}
+        \label{fig:enter-label}
+    \end{figure}
+\end{frame}
+
+\begin{frame}{Main results achieved}
+    \begin{figure}
+        \centering
+        \includegraphics[width=.4\linewidth]{excel-grafico-istogramma.png}
+        \includegraphics[width=.4\linewidth]{excel-grafico-istogramma.png}
+    \end{figure}
+\end{frame}
+
+\begin{frame}{Four graphs}
+    \begin{figure}
+        \centering
+        \includegraphics[width=.45\linewidth]{excel-grafico-istogramma.png}
+        \includegraphics[width=.45\linewidth]{excel-grafico-istogramma.png}\\
+        \includegraphics[width=.45\linewidth]{excel-grafico-istogramma.png}
+        \includegraphics[width=.45\linewidth]{excel-grafico-istogramma.png}\\
+    \end{figure}
+\bigskip
+\centering
+\scriptsize{Peepoo et al. (2064)}
+\end{frame}
+
+\end{document}
