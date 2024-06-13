@@ -23,10 +23,12 @@ im.plotRGB(lbdo, 4,3,2)
 im.plotRGB(dbdo, 4,3,2)
 
 # per mettere in risalto lo specchio d'acqua utilizzo l'indice NWDI (Normalized Difference Water Index)
-# tale indice prevede di 
-dif1 = lbdo[[2]]-lbdo[[4]]
-sum1 = lbdo[[2]]+lbdo[[4]]
-nwat1= dif1/sum1
+# tale indice si comporta come l'NDVI, quindi ha valori massimi e minimi compresi tra 1 e -1. 
+# per valori maggiori di 0.3 si assegna il pixel ad uno specchio d'acqua. Viene utilizzato proprio per quantificare l'innalzamento del livello d'acqua.
+
+dif1 = lbdo[[2]]-lbdo[[4]] # differenza tra GREEN e NIR
+sum1 = lbdo[[2]]+lbdo[[4]] # somma tra GREEN e NIR
+nwat1= dif1/sum1 
 plot(nwat1, col=viridis (1000))
 
 dif2 = dbdo[[2]]-dbdo[[4]]
@@ -34,6 +36,7 @@ sum2 = dbdo[[2]]+dbdo[[4]]
 nwat2= dif2/sum2
 plot(nwat2, col=viridis (1000))
 
+# sfrutto la classificazione per poter quantificare l'incremento della superficie idrica, paragonando le percentuali ottenute e assegnate all'acqua.
 nwat1c <- im.classify(nwat1, num_clusters=4)
 # classe 1: Antropizzazione 9.04   %
 # classe 2: Suolo           21.12  %
@@ -46,15 +49,17 @@ nwat2c <- im.classify(nwat2, num_clusters=4)
 # classe 3: Suolo           61.30  %
 # classe 4: Vegetazione     22.67  %
 
-totnwat1 <- ncell(nwat1c)
-fnwat1 <- freq(nwat1c)
-prop_nwat1 = fnwat1 / totnwat1
-perc_nwat1 = prop_nwat1 * 100
+tot1 <- ncell(nwat1c)
+f1 <- freq(nwat1c)
+prop1 = f1 / tot1
+perc1 = prop1 * 100 # trasformo i dati in percentuali
 
-totnwat2 <- ncell(nwat2c)
-fnwat2 <- freq(nwat2c)
-prop_nwat2 = fnwat2 / totnwat2
-perc_nwat2 = prop_nwat2 * 100
+tot2 <- ncell(nwat2c)
+f2 <- freq(nwat2c)
+prop2 = f2 / tot2
+perc2 = prop2 * 100
+
+# creo una tabella in cui verranno inseriti i dati relativi ad ogni classe
 
 class <- c("Altro", "Suolo", "Veg.", "Acqua")
 pwat1 <- c(9.04, 21.12, 69.62, 0.22)
