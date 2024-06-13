@@ -1,7 +1,7 @@
 library(terra)
 library(viridis)
 
-setwd("C:/Telerilevamento2024/Lac17-24") # imposto la cartella di lavoro 
+setwd("C:/TelExam") # imposto la cartella di lavoro 
 lac1 <- rast("lac1.jpg") # importo l'immagine attraverso la funzione rast()
 nir1 <- rast("nir1.jpg") # importo l'immagine infrarosso
 
