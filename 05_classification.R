@@ -1,6 +1,7 @@
 # i modi per quantificare quanta vegetazione è stata persa durante gli anni sono due: 
 # proporzione di due classi e differenza tra gli indici calcolati
-# per creare una classe: selezione casuale di pixel; controllo il loro comportamento nello spazio spettrale (grafico con le bande sulle ascisse e ordinate); si creano così dei cluster; i pixel incogniti vengono classificati in base alle distanze (k) tra le medie dei cluster creati (training sights).
+# per creare una classe: selezione casuale di pixel; controllo il loro comportamento nello spazio spettrale (grafico con le bande sulle ascisse e ordinate); 
+# si creano così dei cluster; i pixel incogniti vengono classificati in base alle distanze (k) tra le medie dei cluster creati (training sights).
 # una volta ottenuta la mappa classificata si possono quantificare i pixel che appartengono ad una o ad un'altra classe.
 
 #installo il pacchetto "ggplot2"
