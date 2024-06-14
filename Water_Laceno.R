@@ -14,7 +14,6 @@ l17_2 <- rast("l17_2.tiff")
 l17_3 <- rast("l17_3.tiff")
 l17_4 <- rast("l17_4.tiff")
 l17 <- c(l17_1, l17_2, l17_3, l17_4)
-
 im.plotRGB(l17, 4,3,2)
 
 l17c <- im.classify(l17, num_clusters=5)
