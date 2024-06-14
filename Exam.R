@@ -1,26 +1,34 @@
 library(terra)
 library(imageRy)
 library(viridis)
+library(ggplot2)
+library(patchwork)
+
 
 setwd("C:/TelExam") # imposto la cartella di lavoro 
+
 # Ad ogni immagine è assegnata una banda
 lb1 <- rast("lb1.jpg") # blue
 lb2 <- rast("lb2.jpg") # green
 lb3 <- rast("lb3.jpg") # red
 lb4 <- rast("lb4.jpg") # NIR
 
-lbdo <- c(lb1,lb2,lb3,lb4)
+
+lbdo <- c(lb1,lb2,lb3,lb4) #costruisco l'immagine che andrò ad utilizzare assemblandola con le diverse bande.
+
 
 db1 <- rast("db1.jpg") # blue
 db2 <- rast("db2.jpg") # green
 db3 <- rast("db3.jpg") # red
 db4 <- rast("db4.jpg") # NIR
 
-dbdo <- c(db1,db2,db3,db4)
+dbdo <- c(db1,db2,db3,db4) #costruisco l'immagine che andrò ad utilizzare assemblandola con le diverse bande.
+
 
 par(mfrow=c(2,1)) #confronto delle due immagini sostituendo la banda del blu con quella NIR
 im.plotRGB(lbdo, 4,3,2)
 im.plotRGB(dbdo, 4,3,2)
+
 
 # per mettere in risalto lo specchio d'acqua utilizzo l'indice NWDI (Normalized Difference Water Index)
 # tale indice si comporta come l'NDVI, quindi ha valori massimi e minimi compresi tra 1 e -1. 
@@ -38,16 +46,18 @@ plot(nwat2, col=viridis (1000))
 
 # sfrutto la classificazione per poter quantificare l'incremento della superficie idrica, paragonando le percentuali ottenute e assegnate all'acqua.
 nwat1c <- im.classify(nwat1, num_clusters=4)
-# classe 1: Antropizzazione 9.04   %
-# classe 2: Suolo           21.12  %
-# classe 3: Vegetazione     69.62  %
-# classe 4: Acqua           0.22   %
+
+# classe 1: Altro                9.04   %
+# classe 2: Suolo                21.12  %
+# classe 3: Vege.                69.62  %
+# classe 4: Acqua                0.22   %
 
 nwat2c <- im.classify(nwat2, num_clusters=4)
-# classe 1: Antropizzazione 15.13  %
-# classe 2: Acqua           0.89   %
-# classe 3: Suolo           61.30  %
-# classe 4: Vegetazione     22.67  %
+
+# classe 1: Altro                15.13  %
+# classe 2: Acqua                0.89   %
+# classe 3: Suolo                61.30  %
+# classe 4: Vege.                22.67  %
 
 tot1 <- ncell(nwat1c)
 f1 <- freq(nwat1c)
@@ -61,9 +71,14 @@ perc2 = prop2 * 100
 
 # creo una tabella in cui verranno inseriti i dati relativi ad ogni classe
 
-class <- c("Altro", "Suolo", "Veg.", "Acqua")
+class <- c("Altro", "Suolo", "Vege.", "Acqua")
 pwat1 <- c(9.04, 21.12, 69.62, 0.22)
 pwat2 <- c(15.13, 61.30, 22.67, 0.89)
 
 tabout <- data.frame(class, pwat1, pwat2)
 tabout
+
+p1 <- ggplot(tabout, aes(x=class, y=pwat1, color=class)) + geom_bar(stat="identity", fill="white") + ylim(c(0,100)) # imposto il grafico per mostrare i risultati
+p2 <- ggplot(tabout, aes(x=class, y=pwat2, color=class)) + geom_bar(stat="identity", fill="white") + ylim(c(0,100))
+p1 + p2
+
