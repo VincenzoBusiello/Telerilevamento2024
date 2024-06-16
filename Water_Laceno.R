@@ -63,20 +63,7 @@ d20_4 <- rast("d20_4.tiff")
 d20 <- c(d20_1, d20_2, d20_3, d20_4)
 
 
-                                  # lago in estate e inverno 2021
-l21_1 <- rast("l21_1.tiff")
-l21_2 <- rast("l21_2.tiff")
-l21_3 <- rast("l21_3.tiff")
-l21_4 <- rast("l21_4.tiff")
-l21 <- c(l21_1, l21_2, l21_3, l21_4)
-
-d21_1 <- rast("d21_1.tiff")
-d21_2 <- rast("d21_2.tiff")
-d21_3 <- rast("d21_3.tiff")
-d21_4 <- rast("d21_4.tiff")
-d21 <- c(d21_1, d21_2, d21_3, d21_4)
-
-par(mfrow=c(5,2))
+par(mfrow=c(4,2))
 im.plotRGB(l17, 4,3,2)
 im.plotRGB(d17, 4,3,2)
 im.plotRGB(l18, 4,3,2)
@@ -85,8 +72,6 @@ im.plotRGB(l19, 4,3,2)
 im.plotRGB(d19, 4,3,2)
 im.plotRGB(l20, 4,3,2)
 im.plotRGB(d20, 4,3,2)
-im.plotRGB(l21, 4,3,2)
-im.plotRGB(d21, 4,3,2)
 
 # calcolo l'NDWI seguendo la formula NDWI=(verde-NIR)/(verde+NIR)
 
@@ -127,22 +112,20 @@ sum4_i = d20[[2]] + d20[[4]] # somma tra GREEN e NIR
 ndwi4_i = dif4_i / sum4_i
 
 
-
 # visualizzazione degli indici NDWI per ogni stagione e anno
 par(mfrow=c(4,2))
-plot(ndwi1_e, col=magma (100))
-plot(ndwi1_i, col=magma (100))
-plot(ndwi2_e, col=magma (100))
-plot(ndwi2_i, col=magma (100))
-plot(ndwi3_e, col=magma (100))
-plot(ndwi3_i, col=magma (100))
-plot(ndwi4_e, col=magma (100))
-plot(ndwi4_i, col=magma (100))
-
+plot(ndwi1_e, col=viridis (100))
+plot(ndwi1_i, col=viridis (100))
+plot(ndwi2_e, col=viridis (100))
+plot(ndwi2_i, col=viridis (100))
+plot(ndwi3_e, col=viridis (100))
+plot(ndwi3_i, col=viridis (100))
+plot(ndwi4_e, col=viridis (100))
+plot(ndwi4_i, col=viridis (100))
 
 
 # classificazione
-par(mfrow=c(4,2))
+par(mfrow=c(4,4))
 
 e17c <- im.classify(ndwi1_e, num_clusters=3)
 
@@ -225,31 +208,18 @@ prop20i = f20i / t20i
 perc20i = prop20i * 100
 perc20i
 
-#DEVO FARE ASSEGNAZIONE PERCENTUALI PER OGNI CLASSIFICAZIONE
+
+class <- c("estate", "inverno")
+veg <- c(64.69, 23.82, 59.67, 13.50, 61.81, 27.47, 60.36, 15.59)
+soil <- c(33.06, 68.72, 37.36, 84.02, 35.73, 60.29, 37.75, 81.31)
+water <- c(2.25, 7.46, 2.96, 2.49, 2.46, 12.23, 1.89, 3.09)
 
 
-# creo il dataframe
-years <- c(2017, 2018, 2019, 2020, 2021)
-water <- c(2.60, 3.90, 2.98, 2.25, 3.59)
-soil <- c(13.81, 13.41, 24.94, 11.52, 10.55)
-veg <- c(84.23, 82.70, 73.08, 86.23, 85.87)
-
-tab <- data.frame(years, water, soil, veg)
+tab <- data.frame(class, soil, vegetation, water)
 tab
 
 
-# per comporre il dataframe sono state compresse le classi comprendenti veg1, veg2, grassland in Veget.
-#class <- c("Water", "Soil", "Veget.")
-#p1 <- c(2.60, 13.18, 84.23)
-#p2 <- c(3.9, 13.41, 82.7)
-#p3 <- c(2.98, 24.94, 73.08)
-#p4 <- c(2.25, 11.52, 86.23)
-#p5 <- c(3.59, 10.55, 85.87)
-
-
- # imposto il grafico per mostrare i risultati
-pw1 <- ggplot(tab, aes(x=class, y=p1, color=class)) + geom_bar(stat="identity", fill="white") + ylim(c(0,100))
-pw2 <- ggplot(tab, aes(x=class, y=p2, color=class)) + geom_bar(stat="identity", fill="white") + ylim(c(0,100))
-pw3 <- ggplot(tab, aes(x=class, y=p3, color=class)) + geom_bar(stat="identity", fill="white") + ylim(c(0,100))
-pw4 <- ggplot(tab, aes(x=class, y=p4, color=class)) + geom_bar(stat="identity", fill="white") + ylim(c(0,100))
-pw5 <- ggplot(tab, aes(x=class, y=p5, color=class)) + geom_bar(stat="identity", fill="white") + ylim(c(0,100))
+psoil <- ggplot(tab, aes(x=class, y=soil, color=class)) + geom_boxplot(outlier.colour="red", outlier.shape=8, outlier.size=4)+ ylim(c(0,100))
+pveg <- ggplot(tab, aes(x=class, y=veg, color=class)) + geom_boxplot(outlier.colour="red", outlier.shape=8, outlier.size=4) + ylim(c(0,100))
+pwater <- ggplot(tab, aes(x=class, y=water, color=class)) + geom_boxplot(outlier.colour="red", outlier.shape=8, outlier.size=4) + ylim(c(0,100))
+psoil + pveg + pwater
