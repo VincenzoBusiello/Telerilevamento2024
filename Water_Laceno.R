@@ -1,13 +1,15 @@
 library(terra) # Per la funzione rast()
 library(imageRy) # Per im.plotRGB() e im.classify()
+library(viridis) # Per utilizzare colorRampPalette adatte a chi soffre di deuteranomalia (daltonismo)
 library(ggplot2) # Per la creazione dei boxplot
 library(patchwork) # Per visualizzare i boxplot insieme
-library(viridis) # Per utilizzare colorRampPalette adatte a chi soffre di deuteranomalia (daltonismo)
+
 
 # Imposto la cartella di lavoro dove sono state posizionate le immagini relative all'altopiano Laceno.
 # Tale codice ha l'obiettivo di quantificare la variazione della superficie del Lago Laceno tra la 
 # stagione estiva e quella invernale e valutare l'andamento in un periodo compreso tra il 2017
 # e il 2020. 
+
 setwd("C:/TelExam")
 
 # Le immagini sono state scaricate grazie al Copernicus Browser. 
@@ -19,63 +21,75 @@ setwd("C:/TelExam")
 # Verrà fatto lo stesso per ogni anno.
 
                                   # estate e inverno 2017
-l17_1 <- rast("l17_1.tiff")
+l17_1 <- rast("l17_3.tiff")
 l17_2 <- rast("l17_2.tiff")
-l17_3 <- rast("l17_3.tiff")
+l17_3 <- rast("l17_1.tiff")
 l17_4 <- rast("l17_4.tiff")
 l17 <- c(l17_1, l17_2, l17_3, l17_4)
 
-d17_1 <- rast("d17_1.tiff")
+d17_1 <- rast("d17_3.tiff")
 d17_2 <- rast("d17_2.tiff")
-d17_3 <- rast("d17_3.tiff")
+d17_3 <- rast("d17_1.tiff")
 d17_4 <- rast("d17_4.tiff")
 d17 <- c(d17_1, d17_2, d17_3, d17_4)
 
 
                                   # in estate e inverno 2018
-l18_1 <- rast("l18_1.tiff")
+l18_1 <- rast("l18_3.tiff")
 l18_2 <- rast("l18_2.tiff")
-l18_3 <- rast("l18_3.tiff")
+l18_3 <- rast("l18_1.tiff")
 l18_4 <- rast("l18_4.tiff")
 l18 <- c(l18_1, l18_2, l18_3, l18_4)
 
-d18_1 <- rast("d18_1.tiff")
+d18_1 <- rast("d18_3.tiff")
 d18_2 <- rast("d18_2.tiff")
-d18_3 <- rast("d18_3.tiff")
+d18_3 <- rast("d18_1.tiff")
 d18_4 <- rast("d18_4.tiff")
 d18 <- c(d18_1, d18_2, d18_3, d18_4)
 
 
                                   # lago in estate e inverno 2019
-l19_1 <- rast("l19_1.tiff")
+l19_1 <- rast("l19_3.tiff")
 l19_2 <- rast("l19_2.tiff")
-l19_3 <- rast("l19_3.tiff")
+l19_3 <- rast("l19_1.tiff")
 l19_4 <- rast("l19_4.tiff")
 l19 <- c(l19_1, l19_2, l19_3, l19_4)
 
-d19_1 <- rast("d19_1.tiff")
+d19_1 <- rast("d19_3.tiff")
 d19_2 <- rast("d19_2.tiff")
-d19_3 <- rast("d19_3.tiff")
+d19_3 <- rast("d19_1.tiff")
 d19_4 <- rast("d19_4.tiff")
 d19 <- c(d19_1, d19_2, d19_3, d19_4)
 
 
                                   # lago in estate e inverno 2020
-l20_1 <- rast("l20_1.tiff")
+l20_1 <- rast("l20_3.tiff")
 l20_2 <- rast("l20_2.tiff")
-l20_3 <- rast("l20_3.tiff")
+l20_3 <- rast("l20_1.tiff")
 l20_4 <- rast("l20_4.tiff")
 l20 <- c(l20_1, l20_2, l20_3, l20_4)
 
-d20_1 <- rast("d20_1.tiff")
+d20_1 <- rast("d20_3.tiff")
 d20_2 <- rast("d20_2.tiff")
-d20_3 <- rast("d20_3.tiff")
+d20_3 <- rast("d20_1.tiff")
 d20_4 <- rast("d20_4.tiff")
 d20 <- c(d20_1, d20_2, d20_3, d20_4)
 
 # imposto una visualizzazione delle immagini utilizzando la funzione par(), 
-# creando una griglia di 4 righe e 2 colonne. Il plot viene impostato con la banda del NIR
-# in prima posizione così da evidenziare al meglio la vegetazione e il lago.
+# creando una griglia di 4 righe e 2 colonne. Il primo plot mostra le immagini in TrueColor. 
+# Il secondo plot viene impostato con la banda del NIR in prima posizione così da evidenziare al meglio la vegetazione e il lago.
+
+par(mfrow=c(4,2))
+im.plotRGB(l17, 1,2,3)
+im.plotRGB(d17, 1,2,3)
+im.plotRGB(l18, 1,2,3)
+im.plotRGB(d18, 1,2,3)
+im.plotRGB(l19, 1,2,3)
+im.plotRGB(d19, 1,2,3)
+im.plotRGB(l20, 1,2,3)
+im.plotRGB(d20, 1,2,3)
+
+dev.off()
 
 par(mfrow=c(4,2))
 im.plotRGB(l17, 4,3,2)
@@ -86,6 +100,8 @@ im.plotRGB(l19, 4,3,2)
 im.plotRGB(d19, 4,3,2)
 im.plotRGB(l20, 4,3,2)
 im.plotRGB(d20, 4,3,2)
+
+dev.off()
 
 # calcolo l'NDWI (Normalized Difference Water Index) seguendo la formula: 
 # NDWI=(B3-B8)/(B3+B8)   McFeeters (1996)
@@ -154,8 +170,11 @@ plot(ndwi3_i, col=viridis (100)) # 2019 inverno
 plot(ndwi4_e, col=viridis (100)) # 2020 estate
 plot(ndwi4_i, col=viridis (100)) # 2020 inverno
 
+dev.off()
 
-# classificazione che verrà visualizzata 
+# Creazione del par per la visualizzazione delle classificazioni di ogni stagione
+# utilizzando come base il risultato del NDWI.
+
 par(mfrow=c(4,2))
 
 e17c <- im.classify(ndwi1_e, num_clusters=3)
@@ -239,18 +258,25 @@ prop20i = f20i / t20i
 perc20i = prop20i * 100
 perc20i
 
-# creazione del dataframe in cui raccolgo le percentuali di copertura delle varie classi dividendole per stagione
+dev.off()
+
+# creazione dei campi che verranno utilizzati per il dataframe 
+# raccolgo le percentuali di copertura delle varie classi dividendole per stagione
+
 season <- c("summer", "winter")
 soil <- c(33.06, 68.72, 37.36, 84.02, 35.73, 60.29, 37.75, 81.31) # percentuali di suolo nudo
 veg <- c(64.69, 23.82, 59.67, 13.50, 61.81, 27.47, 60.36, 15.59) # percentuali di vegetazione
 water <- c(2.25, 7.46, 2.96, 2.49, 2.46, 12.23, 1.89, 3.09) # percentuali della dimensione del lago
 # tali percentuali sono espresse in relazione alla superficie totale dell'area di studio
 
-#
+# creazione del dataframe
+
 tab <- data.frame(season, soil, veg, water)
 tab
 
-View(tab) # permette la visualizzazione del dataframe in una versione tabellare
+# Visualizzo il dataframe in una versione tabellare
+
+View(tab) 
 
 # creazione dei boxplot 
 
