@@ -1,0 +1,195 @@
+\documentclass{beamer} % classe di documenti per poter creare le presentazioni che in questo linguaggio vengono definite come frame. 
+\usepackage{graphicx} % Package necessario per utilizzare immagini
+\usepackage{listings} % Pacchetto che può essere utilizzato per caricare degli algoritmi direttamente dagli script.
+\usepackage{multicol}
+\usepackage{url}
+
+\definecolor{mygreen}{rgb}{0,0.6,0}
+
+
+\usetheme{Dresden}
+\usecolortheme{sidebartab}
+
+\title{Variazione della superficie del Lago Laceno}
+\author{Vincenzo Busiello}
+\date{19 Giugno 2024}
+
+\begin{document}
+
+\maketitle
+
+\AtBeginSection[]
+{
+\begin{frame}
+\frametitle{Outline}    
+    \tableofcontents[currentsection]
+\end{frame}
+}
+
+\section{Lago Laceno}
+
+        \begin{frame}{Lago Laceno}
+            \begin{multicols}{2}
+                \begin{itemize}
+                    \item {\scriptsize Lago situato sull'omonimo altopiano a 1100 m s.l.m., nel comune di Bagnoli Irpino (AV), Campania.}
+                    \item {\scriptsize Le sue dimensioni sono diminuite a causa delle bonifiche ivi effettuate all'inizio del secolo scorso e degli eventi di siccità man mano più frequenti.}
+                \end{itemize}
+            \columnbreak
+                \begin{center}
+                    \includegraphics[width=0.5\textwidth]{LagoLaceno.jpg}
+                    \caption{{\scriptsize Vista del Lago Laceno}}
+                \end{center}
+            \end{multicols}
+        \end{frame}
+
+        \begin{frame}{Quesiti di partenza}
+            \begin{center}
+                \begin{itemize}
+                    \item La superficie del lago è cambiata negli ultimi anni?
+                    \item C'è una variazione stagionale? Se sì, di quanto?
+                    \item La variazione stagionale è sempre presente?
+                \end{itemize}
+            \end{center}
+        \end{frame}
+
+        \begin{frame}{Dati}
+            \begin{center}
+            Le immagini utilizzate per questo progetto sono state scaricate dal sito \url{https://browser.dataspace.copernicus.eu} utilizzando i seguenti criteri:
+                \begin{itemize}
+                    \item E' stata selezionata un'area che comprende il lago oggetto d'esame
+                    \item Date di confronto: estate - inverno dal 2017 al 2020
+                    \item Copertura di nuvole minore del 10\%
+                    \item Minor copertura di neve
+                    \item Download delle bande 2,3,4 e 8 in formato .tiff 16 bit
+                \end{itemize}
+            \end{center}
+        \end{frame}
+
+        \begin{frame}{Esempio del sito di studio}
+                \begin{multicols}{2}
+                    \begin{center}
+                        \includegraphics[width=0.25\textwidth]{es2017.jpg}\\
+                        \caption{{\scriptsize Estate 2017}}\\
+                \columnbreak
+                        \includegraphics[width=0.25\textwidth]{in2017.jpg}\\
+                        \caption{{\scriptsize Inverno 2017}}\\
+                    \end{center}
+                \end{multicols}
+        \end{frame}
+
+\section{Dati e Codice}
+        
+        \begin{frame}{Normalized Difference Water Index}
+            \begin{equation}
+                NDWI = \frac{(GREEN - NIR)}{(GREEN + NIR)}
+            \end{equation}
+        \end{frame}
+        
+        \begin{frame}{Pacchetti}
+            \begin{itemize}
+                \item    \texttt{library(terra)} 
+                \item    \texttt{library(imageRy)} 
+                \item    \texttt{library(viridis)}
+                \item    \texttt{library(ggplot2)} 
+                \item    \texttt{library(patchwork)}
+            \end{itemize}
+        \end{frame}
+        
+            \begin{frame}{Funzioni}
+                \begin{multicols}{2}
+                    \begin{itemize}
+                        \item    \texttt{setwd()} 
+                        \item    \texttt{rast()} 
+                        \item    \texttt{c()}
+                        \item    \texttt{par()} 
+                        \item    \texttt{im.plotRGB()}
+                        \item    \texttt{plot()}
+                        \item    \texttt{im.classify()}
+                        \item    \texttt{ncell()}
+                        \item    \texttt{freq()}
+                \columnbreak
+                        \item    \texttt{data.frame()}
+                        \item    \texttt{View()}
+                        \item    \texttt{ggplot()}
+                        \item    \texttt{aes()}
+                        \item    \texttt{geom_boxplot()}
+                        \item    \texttt{ylim()}
+                        \item    \texttt{xlab()}
+                        \item    \texttt{ylab()}
+                        \item    \texttt{ggtitle()}
+                    \end{itemize}
+                \end{multicols}
+            \end{frame}
+        
+        \begin{frame}{TrueColor - Codice}
+            \lstinputlisting[language=R, firstline=82, lastline=90, commentstyle=\color{mygreen}, basicstyle=\footnotesize]{ScriptEsame.R}
+        \end{frame}
+
+        \begin{frame}{TrueColor - Immagine}
+            \begin{center}
+                \includegraphics[width=0.5\textwidth]{TrueColor.png}
+            \end{center}
+        \end{frame}
+
+        \begin{frame}{FalseColor - Codice}
+            \lstinputlisting[language=R, firstline=94, lastline=102, commentstyle=\color{mygreen}, basicstyle=\footnotesize]{ScriptEsame.R}
+        \end{frame}
+        
+        \begin{frame}{FalseColor - Immagine}
+            \begin{center}
+                \includegraphics[width=0.5\textwidth]{FalseColor.png}
+            \end{center}
+        \end{frame}
+
+        \begin{frame}{NDWI - Codice}
+            \lstinputlisting[language=R, firstline=111, lastline=120, commentstyle=\color{mygreen}, basicstyle=\footnotesize]{ScriptEsame.R}
+        \end{frame}
+
+        \begin{frame}{NDWI - Immagine}
+            \begin{center}
+                \includegraphics[width=0.5\textwidth]{ViridisNDWI.png}
+            \end{center}
+        \end{frame}
+
+        \begin{frame}{Classificazione - Codice}
+            \lstinputlisting[language=R, firstline=180, lastline=188, commentstyle=\color{mygreen}, basicstyle=\tiny]{ScriptEsame.R}
+        \end{frame}
+
+        \begin{frame}{Classificazione - Immagine}
+            \begin{center}
+                \includegraphics[width=0.5\textwidth]{ClassificazioneDEF.png}
+            \end{center}
+        \end{frame}
+
+        \begin{frame}{Percentuali di Copertura Divise per Classi}
+            \begin{center}
+                \includegraphics[width=0.5\textwidth]{tabellaLac.png}
+            \end{center} 
+        \end{frame}
+        
+        \begin{frame}{Boxplot Superfici Classificate}
+            \begin{center}
+                \includegraphics[width=1\textwidth]{boxplot.png}
+            \end{center}
+        \end{frame}
+
+\section{Conclusioni}
+
+        \begin{frame}{Conclusioni}
+            inserisco il testo qui
+        \end{frame}
+
+        \begin{frame}{Conclusioni}
+            inserisco il testo qui
+        \end{frame}
+
+        \begin{frame}{Conclusioni}
+            inserisco il testo qui
+        \end{frame}
+
+        \begin{frame}{Conclusioni}
+            inserisco il testo qui
+        \end{frame}
+
+
+\end{document}
