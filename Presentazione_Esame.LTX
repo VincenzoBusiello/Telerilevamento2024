@@ -7,8 +7,8 @@
 \definecolor{mygreen}{rgb}{0,0.6,0}
 
 
-\usetheme{Dresden}
-\usecolortheme{sidebartab}
+\usetheme{AnnArbor}
+\usecolortheme{seahorse}
 
 \title{Variazione della superficie del Lago Laceno}
 \author{Vincenzo Busiello}
@@ -32,7 +32,7 @@
             \begin{multicols}{2}
                 \begin{itemize}
                     \item {\scriptsize Lago situato sull'omonimo altopiano a 1100 m s.l.m., nel comune di Bagnoli Irpino (AV), Campania.}
-                    \item {\scriptsize Le sue dimensioni sono diminuite a causa delle bonifiche ivi effettuate all'inizio del secolo scorso e degli eventi di siccità man mano più frequenti.}
+                    \item {\scriptsize Le sue dimensioni sono diminuite a causa delle bonifiche effettuate all'inizio del secolo scorso e degli eventi di siccità man mano più frequenti.}
                 \end{itemize}
             \columnbreak
                 \begin{center}
@@ -119,7 +119,7 @@
                         \item    \texttt{ggtitle()}
                     \end{itemize}
                 \end{multicols}
-            \end{frame}
+        \end{frame}
         
         \begin{frame}{TrueColor - Codice}
             \lstinputlisting[language=R, firstline=82, lastline=90, commentstyle=\color{mygreen}, basicstyle=\footnotesize]{ScriptEsame.R}
@@ -173,22 +173,51 @@
             \end{center}
         \end{frame}
 
+        \begin{frame}{Boxplot Superficie del Lago}
+            \begin{center}
+                \includegraphics[width=0.5\textwidth]{GrafAcqua.png}
+            \end{center}
+        \end{frame}
+
 \section{Conclusioni}
 
         \begin{frame}{Conclusioni}
-            inserisco il testo qui
+            \begin{itemize}
+                \item La superficie del lago varia nel periodo 2017-2020. In questi anni lo specchio d'acqua ha ridotto le dimensioni nel periodo estivo mentre nel periodo invernale non sembra seguire un andamento preciso. 
+                \item Le diverse dimensioni del lago potrebbero essere legate ai livelli di precipitazione. Queste appaiono progressivamente minori per periodi estivi; le dimensioni invernali sembrano essere legate alle precipitazioni dell'anno precedente. 
+            \end{itemize}
         \end{frame}
 
-        \begin{frame}{Conclusioni}
-            inserisco il testo qui
+                \begin{frame}{Conclusioni}
+            \begin{itemize}
+                \item Invece, nel 2018 vi è una differenza sostanziale rispetto agli altri anni: la superficie del lago è minore nella stagione invernale rispetto alla stagione estiva; confrontando temperature e precipitazioni medie pare non ci sia alcun legame con tale situazione.
+                \item Sarebbbe interessante vedere i trend del lago negli anni precedenti e postumi al periodo preso in esame per confermare o meno il trend. 
+            \end{itemize}
+        \end{frame}
+        
+\section{Sitografia}
+        \begin{frame}{Sitografia}
+            \begin{itemize}
+                \item \url{https://browser.dataspace.copernicus.eu} \\
+                \item \url{https://centrofunzionale.regione.campania.it/#/pages/sensori/archivio-pluviometrici} \\
+                \item \url{https://en.wikipedia.org/wiki/Normalized_difference_water_index}\\
+            \end{itemize}  
         \end{frame}
 
-        \begin{frame}{Conclusioni}
-            inserisco il testo qui
-        \end{frame}
-
-        \begin{frame}{Conclusioni}
-            inserisco il testo qui
+\section{Ringraziamenti}
+        \begin{frame}{Ringraziamenti}
+            \begin{center}
+                {\huge Grazie per l'attenzione!}\\
+                \bigskip
+                \bigskip
+                \bigskip
+                \bigskip
+                \bigskip
+                \bigskip
+                \bigskip
+                \bigskip
+                \url{https://github.com/VincenzoBusiello}
+            \end{center}
         \end{frame}
 
 
